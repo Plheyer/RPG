@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+  </head>
+  <body>
+    <main>
+      <div id="profil1">
+        <h1>Compteur 1</h1>  
+        <p id="counter1">...</p>
+        <button id="increment1">Increment</button>
+        <button id="decrement1">Decrement</button>
+      </div>
+      <div id="profil2">
+        <h1>Compteur 2</h1>  
+        <p id="counter2">...</p>
+        <button id="increment2">Increment</button>
+        <button id="decrement2">Decrement</button>
+      </div>
+      <div id="profil3">
+        <h1>Compteur 3</h1>  
+        <p id="counter3">...</p>
+        <button id="increment3">Increment</button>
+        <button id="decrement3">Decrement</button>
+      </div>
+      <div id="profil4">
+        <h1>Compteur 4</h1>  
+        <p id="counter4">...</p>
+        <button id="increment4">Increment</button>
+        <button id="decrement4">Decrement</button>
+      </div>
+      <div id="profil5">
+        <h1>Compteur 5</h1>  
+        <p id="counter5">...</p>
+        <button id="increment5">Increment</button>
+        <button id="decrement5">Decrement</button>
+      </div>
+      <div id="profil6">
+        <h1>Compteur 6</h1>  
+        <p id="counter6">...</p>
+        <button id="increment6">Increment</button>
+        <button id="decrement6">Decrement</button>
+      </div>
+    </main>
+	<script>
+        const ws = new WebSocket('ws://localhost:8080');
+        ws.addEventListener("open", () => {
+            console.log('Connected to the server');
+        });
+        ws.addEventListener("message", e => {
+            console.log('Received message:', e);
+            const profile = e.data.toString().split(' ')[0];
+            const counter = e.data.toString().split(' ')[1];
+            switch(profile) {
+              case '1':
+                document.getElementById('counter1').textContent = counter;
+                break;
+              case '2':
+                document.getElementById('counter2').textContent = counter;
+                break;
+              case '3':
+                document.getElementById('counter3').textContent = counter;
+                break;
+              case '4':
+                document.getElementById('counter4').textContent = counter;
+                break;
+              case '5':
+                document.getElementById('counter5').textContent = counter;
+                break;
+              case '6':
+                document.getElementById('counter6').textContent = counter;
+                break;
+            }
+        });
+
+        const counter = document.getElementById('counter');
+        const increment = document.getElementById('increment');
+        const decrement = document.getElementById('decrement');
+        increment1.addEventListener('click', () => {
+            ws.send('1 increment');
+        });
+        increment2.addEventListener('click', () => {
+            ws.send('2 increment');
+        });
+        increment3.addEventListener('click', () => {
+            ws.send('3 increment');
+        });
+        increment4.addEventListener('click', () => {
+            ws.send('4 increment');
+        });
+        increment5.addEventListener('click', () => {
+            ws.send('5 increment');
+        });
+        increment6.addEventListener('click', () => {
+            ws.send('6 increment');
+        });
+
+        decrement1.addEventListener('click', () => {
+            ws.send('1 decrement');
+        });
+        decrement2.addEventListener('click', () => {
+            ws.send('2 decrement');
+        });
+        decrement3.addEventListener('click', () => {
+            ws.send('3 decrement');
+        });
+        decrement4.addEventListener('click', () => {
+            ws.send('4 decrement');
+        });
+        decrement5.addEventListener('click', () => {
+            ws.send('5 decrement');
+        });
+        decrement6.addEventListener('click', () => {
+            ws.send('6 decrement');
+        });
+    </script>
+  </body>
+</html>
